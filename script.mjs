@@ -39,7 +39,7 @@ function display_leaderboard(leaderboard) {
     leaderboard_body.appendChild(row);
   }
 }
-//CodeYourFuture, monadius, rizqahthetechgirlie, SallyMcGrath
+
 // creating the button addeventlistener
 button.addEventListener("click", async function () {
   //clear previous error message content each time the button is clicked
@@ -58,14 +58,18 @@ button.addEventListener("click", async function () {
     return;
   }
 
-  users = await get_users(usernames, (username) => {
-    error_message.textContent += `Failed to retrieve "${username}"\n`;
+  users = await get_users(usernames, (username, reason) => {
+    if (reason === "not_found") {
+      error_message.textContent += `The user "${username}" does not exist. Check the spelling.\n`;
+    } else {
+      error_message.textContent += `Could not load "${username}" from Codewars. Check your internet connection and try again.\n`;
+    }
   });
 
   //If no users were successfully retrieved, then an appropriate error message is displayed and the table is cleared
   if (users.length === 0) {
     error_message.textContent +=
-      "No users could be retrieved. Check the usernames and try again.";
+      "No users could be loaded. See the messages above for what to do.";
     select.replaceChildren(overall_option);
     display_leaderboard([]);
     return;

@@ -9,6 +9,12 @@ export async function get_users(usernames, on_error = () => {}) {
         `https://www.codewars.com/api/v1/users/${username}`,
       );
 
+      // a 404 means the username doesn't exist, which is different from a network failure
+      if (response.status === 404) {
+        on_error(username, "not_found");
+        continue;
+      }
+
       if (!response.ok) {
         throw new Error(`Request failed for ${username}`);
       }
@@ -17,14 +23,13 @@ export async function get_users(usernames, on_error = () => {}) {
       users.push(user);
     } catch (error) {
       //error message for particular username that failed is logged onto the console
-      on_error(username);
+      on_error(username, "request_failed");
       console.error(`Failed to retrieve ${username}:`, error.message);
     }
   }
 
   return users;
 }
-
 //using export so that we can use the function in our tests
 //This function gets exactly what we need for the leaderboard
 export function get_leaderboard(users, language) {
