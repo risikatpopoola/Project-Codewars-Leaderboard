@@ -61,15 +61,21 @@ button.addEventListener("click", async function () {
   users = await get_users(usernames, (username, reason) => {
     if (reason === "not_found") {
       error_message.textContent += `The user "${username}" does not exist. Check the spelling.\n`;
+    } else if (reason === "network_error") {
+      error_message.textContent += `Could not connect to Codewars for "${username}". Check your internet connection and try again.\n`;
+    } else if (reason === "rate_limit") {
+      error_message.textContent += `Codewars is limiting requests for "${username}". Please wait and try again.\n`;
+    } else if (reason === "server_error") {
+      error_message.textContent += `The Codewars service returned a server error for "${username}". Please try again later.\n`;
+    } else if (reason === "invalid_response") {
+      error_message.textContent += `Codewars returned unreadable data for "${username}". Please try again later.\n`;
     } else {
-      error_message.textContent += `Could not load "${username}" from Codewars. Check your internet connection and try again.\n`;
+      error_message.textContent += `The request for "${username}" was rejected. Check the username and try again.\n`;
     }
   });
 
   //If no users were successfully retrieved, then an appropriate error message is displayed and the table is cleared
   if (users.length === 0) {
-    error_message.textContent +=
-      "No users could be loaded. See the messages above for what to do.";
     select.replaceChildren(overall_option);
     display_leaderboard([]);
     return;
