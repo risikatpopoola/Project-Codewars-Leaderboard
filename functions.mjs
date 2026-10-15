@@ -1,35 +1,59 @@
 // on_error is used so that get users doesn't handle error display itself
+
 export async function get_users(usernames, on_error = () => {}) {
   const users = [];
 
   for (const username of usernames) {
-    //error handling, the try and catch block is in the for loop so that all data gotten is handled properly
+    let response;
+
+    // This fetches the user's data from the Codewars API.
     try {
-      const response = await fetch(
+      response = await fetch(
         `https://www.codewars.com/api/v1/users/${username}`,
       );
+    } catch (error) {
+      // A failed fetch usually indicates a network or connection problem.
+      on_error(username, "network_error");
+      continue;
+    }
 
-      // a 404 means the username doesn't exist, which is different from a network failure
-      if (response.status === 404) {
-        on_error(username, "not_found");
-        continue;
-      }
+    // This handles an invalid username separately from other API errors.
+    if (response.status === 404) {
+      on_error(username, "not_found");
+      continue;
+    }
 
-      if (!response.ok) {
-        throw new Error(`Request failed for ${username}`);
-      }
-      //convert response to javascript object
+    // Codewars may limit requests if too many are made.
+    if (response.status === 429) {
+      on_error(username, "rate_limit");
+      continue;
+    }
+
+    // A server error means the API may be temporarily unavailable.
+    if (response.status >= 500) {
+      on_error(username, "server_error");
+      continue;
+    }
+
+    // This handles other unsuccessful HTTP responses.
+    if (!response.ok) {
+      on_error(username, "request_failed");
+      continue;
+    }
+
+    // Converting the response into a JavaScript object.
+    try {
       const user = await response.json();
       users.push(user);
     } catch (error) {
-      //error message for particular username that failed is logged onto the console
-      on_error(username, "request_failed");
-      console.error(`Failed to retrieve ${username}:`, error.message);
+      // The response could not be read as valid JSON.
+      on_error(username, "invalid_response");
     }
   }
 
   return users;
 }
+
 //using export so that we can use the function in our tests
 //This function gets exactly what we need for the leaderboard
 export function get_leaderboard(users, language) {
