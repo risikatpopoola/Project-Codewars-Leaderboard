@@ -1,4 +1,4 @@
-import { get_users } from "./index.mjs";
+import { get_users } from "./script.mjs";
 
 const users = await get_users([
   "CodeYourFuture",

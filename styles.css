@@ -157,17 +157,6 @@ th {
   font-weight: bold;
 }
 
-/* This keeps links underlined and blue so they can be identified as clickable links */
-a {
-  color: #1d4ed8;
-  text-decoration: underline;
-}
-
-/* This darkens links when the user moves the mouse over them */
-a:hover {
-  color: #1e3a8a;
-}
-
 /* This reduces the spacing and heading sizes on tablets and smaller screens */
 @media (max-width: 768px) {
   body {
