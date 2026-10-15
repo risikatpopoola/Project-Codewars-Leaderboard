@@ -1,13 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codewars leaderboard</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codewars leaderboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Codewars Leaderboard</h1>
 
-<script src="index.mjs" type="module"></script>
+      <h2>Where coding skills meet friendly competition.</h2>
+
+      <p>
+        From overall scores to language-specific rankings, discover who's at the
+        top.
+      </p>
+
+      <label for="name">Enter Codewars usernames: </label>
+      <p>Separate multiple usernames with commas to compare their rankings.</p>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="e.g. CodeYourFuture, monadius, SallyMcGrath"
+      />
+      <button type="button" id="load-users">Load Users</button><br />
+      <p id="error-message" role="alert" style="white-space: pre-line"></p>
+      <label for="language-select">Choose Leaderboard: </label>
+      <select id="language-select"></select>
+      <table id="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Clan</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </main>
+  </body>
+
+  <script src="script.mjs" type="module"></script>
 </html>
