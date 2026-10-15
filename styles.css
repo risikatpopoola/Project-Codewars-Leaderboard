@@ -1,0 +1,217 @@
+/* This sets the default sizing for all elements so that padding and borders are included in the element's total width */
+* {
+  box-sizing: border-box;
+}
+
+/* This styles the main page with a light blue background, dark text and spacing around the content */
+body {
+  margin: 0;
+  padding: 30px 20px;
+  font-family: Lucida, Monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e293b;
+  background-color: #eff6ff;
+}
+
+/* This keeps the main content centred and prevents it from becoming too wide on larger screens */
+main {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* This makes the main heading stand out using a dark blue colour and a larger font size */
+h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #1e3a8a;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+/* This styles the introductory heading to make it noticeable while keeping it smaller than the main heading */
+h2 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #1e40af;
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+/* This adds consistent spacing between paragraphs and makes the text easier to read */
+p {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+/* This places the input label on its own line and makes it bold so users can identify what to enter */
+label {
+  display: block;
+  margin-top: 20px;
+  color: #1e293b;
+  font-weight: bold;
+}
+
+/* This gives the input, dropdown and button consistent sizing, spacing and rounded corners */
+input,
+select,
+button {
+  max-width: 100%;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid #64748b;
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* This gives the input and dropdown a white background with dark text so the entered information is easy to read */
+input,
+select {
+  background-color: #ffffff;
+  color: #1e293b;
+}
+
+/* This makes the username input fill the available width without extending beyond its container */
+input {
+  width: 100%;
+}
+
+/* This makes the button blue with white text so users can easily identify the main action */
+button {
+  background-color: #1d4ed8;
+  border: 2px solid #1d4ed8;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* This changes the button to a darker blue when the user moves the mouse over it */
+button:hover {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+}
+
+/* This adds a visible outline when users navigate the input, dropdown or button using a keyboard */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 3px;
+}
+
+/* This displays error messages in dark red with a pale red background so they are easy to distinguish from normal text */
+#error-message {
+  color: #b91c1c;
+  background-color: #fee2e2;
+  border: 1px solid #b91c1c;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+/* This hides the error message area when it contains no text, preventing an empty box from taking up space */
+#error-message:empty {
+  display: none;
+}
+
+/* This allows the table to scroll horizontally on smaller screens instead of overflowing the page */
+.table-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 24px;
+  border-radius: 8px;
+}
+
+/* This makes the leaderboard fill its container and combines neighbouring cell borders into single lines */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+/* This adds spacing inside each table cell and gives every cell a visible border */
+th,
+td {
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  text-align: left;
+}
+
+/* This gives the table headings a light blue background and dark blue text to distinguish them from the results */
+th {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+/* This highlights the winner with a light blue background and bold, dark blue text to match the website's theme */
+.winner {
+  background-color: #f0982c;
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+/* This keeps links underlined and blue so they can be identified as clickable links */
+a {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* This darkens links when the user moves the mouse over them */
+a:hover {
+  color: #1e3a8a;
+}
+
+/* This reduces the spacing and heading sizes on tablets and smaller screens */
+@media (max-width: 768px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}
+
+/* This adjusts the layout for small mobile screens so the form controls fit the available width */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  h2 {
+    font-size: 19px;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
